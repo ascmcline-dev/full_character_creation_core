@@ -61,7 +61,7 @@ def test_current_only_registry():
     assert set(NODE_CLASS_MAPPINGS) == {
         "QwenDatasetQueue", "FCCDatasetDirector", "FCCQueueItemRouter",
         "FCCKreaBlueprintDatasetDirector", "FCCKreaQueueItemRouter",
-        "CharacterBlueprintCreatorV254", "CharacterShotControlV254", "CharacterPromptAssemblerV254",
+        "CharacterBlueprintCreatorV260", "CharacterShotControlV260", "CharacterPromptAssemblerV260",
         "FCCQwenAnglePromptMode", "FCCSupportPanel",
     }
 
@@ -239,7 +239,14 @@ def test_character_creator_support_panel_assets_and_links_exist():
     assert "kaustorment_support.webp" in js
     assert "buymeacoffee.com/ascmclinej" in js
     assert "discord.gg/ufU6UcrK6" in js
-    assert 'id === "CharacterBlueprintCreatorV252"' in js
+    assert 'CharacterBlueprintCreatorV255' in js
+    assert 'CharacterBlueprintCreatorV258' in js
+    assert 'CharacterShotControlV258' in js
+    assert 'CharacterPromptAssemblerV258' in js
+    assert 'CharacterBlueprintCreatorV260' in js
+    assert 'CharacterShotControlV260' in js
+    assert 'CharacterPromptAssemblerV260' in js
+    assert 'male_genital_state: "Male Genital State"' in js
     assert 'id === "FCCSupportPanel"' in js
     assert "restoreCompatibilityWidgets" in js
     assert "widget.hidden = false" in js

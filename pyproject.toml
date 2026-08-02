@@ -1,5 +1,5 @@
 [project]
 name = "full-character-creation-core"
-version = "2.4.13"
-description = "Full Character Creation Studio quality-first Krea2 Blueprint Documentation and Qwen face-angle nodes with floor-pose, crop, garment, tattoo, piercing, and frontend compatibility fixes"
+version = "2.4.20"
+description = "Full Character Creation Studio staged Krea2/Qwen suite with native clinical macro, staged Krea2/Qwen, and checklist-driven regional documentation"
 requires-python = ">=3.10"

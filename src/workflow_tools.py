@@ -162,7 +162,7 @@ class FCCQwenAnglePromptMode:
     CATEGORY = "character creation/dataset"
     FUNCTION = "build_prompt"
     DESCRIPTION = (
-        "Face-only v2.8.13 camera prompt selector. It maps exact approved-face shot IDs to clean Qwen Image Edit 2511 or 2509 Multiple Angles prompts. "
+        "Stage 3 camera prompt selector. It maps approved face, midshot, full-body, and body-regional shot IDs to clean Qwen Image Edit 2511 or 2509 Multiple Angles prompts. "
         "Angle modes never pass FCC body, anatomy, clothing, tattoo, piercing, count-lock, or character-ID prose into the encoder."
     )
     RETURN_TYPES = ("STRING", "STRING")
@@ -187,6 +187,15 @@ class FCCQwenAnglePromptMode:
             prompt = str(legacy_prompt or "").strip()
         else:
             prompt = _prompt_2511(azimuth, elevation, distance)
+        category_low = str(category or "").lower()
+        if "face" in category_low:
+            reference_rule = "REFERENCE RULE: Image 1 must be the approved Krea face portrait from a Stage 2 face anchor or face-close identity reference."
+        elif "midshot" in category_low:
+            reference_rule = "REFERENCE RULE: Image 1 must be an approved Stage 2 or curated midshot reference matching the intended identity and crop."
+        elif "full_body" in category_low or "full-body" in category_low:
+            reference_rule = "REFERENCE RULE: Image 1 must be an approved full-body reference with the complete character and requested outfit visible."
+        else:
+            reference_rule = "REFERENCE RULE: Image 1 must be an approved Stage 2 body-only regional reference matching the selected anatomical region; do not substitute a face portrait."
         summary = "\n".join([
             f"PROMPT MODE: {prompt_mode}",
             f"SHOT ID: {shot_id}",
@@ -195,8 +204,9 @@ class FCCQwenAnglePromptMode:
             f"ELEVATION: {elevation}",
             f"DISTANCE: {distance}",
             f"ACTUAL ENCODER PROMPT: {prompt}",
-            "REFERENCE RULE: Image 1 must be the approved Krea face portrait, not a body or regional documentation image.",
+            reference_rule,
             "QUALITY DIAGNOSTIC: validate the angle LoRA on a clean compatible Qwen angle lane before adding skin or other LoRAs.",
+            "MANUAL REVIEW: every generated candidate must be reviewed by the user; no automatic pass/reject gate is active.",
         ])
         return prompt, summary
 

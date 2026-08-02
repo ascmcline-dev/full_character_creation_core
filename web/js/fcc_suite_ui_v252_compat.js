@@ -14,7 +14,7 @@ const CREATOR_LABELS = {
     custom_chest_description: "Custom Chest Description", bust_size: "Bust Size",
     bust_shape: "Breast Shape — Base / Projection / Spacing", bust_position: "Bust Position — Vertical Placement on Torso",
     bust_firmness: "Bust Firmness", bust_augmentation: "Bust Augmentation — Projection / Upper Fullness Effect",
-    groin_anatomy: "Groin Anatomy Source", male_genital_size: "Male Genital Size", male_foreskin_status: "Circumcision / Foreskin",
+    groin_anatomy: "Groin Anatomy Source", male_genital_size: "Male Genital Size", male_foreskin_status: "Circumcision / Foreskin", male_genital_state: "Male Genital State",
     custom_groin_anatomy: "Custom Groin Anatomy", pubic_hair_style: "Pubic Hair Grooming",
     custom_pubic_hair_style: "Custom Pubic Hair Grooming", use_advanced_lower_body_notes: "Use Advanced Lower-Body Notes",
     advanced_lower_body_notes: "Advanced Lower-Body Notes", visible_presentation_mode: "Visible Presentation / Clothing State",
@@ -33,7 +33,7 @@ const CREATOR_LABELS = {
     piercing_input_mode: "One Piercing Entry Method", piercing_descriptors: "Piercing Descriptions — One Per Line",
     piercing_location: "Single Piercing Location", piercing_type: "Single Piercing Jewelry Type",
     piercing_material: "Single Piercing Material", piercing_visibility: "Single Piercing Visibility",
-    structured_piercing_custom: "Custom Piercing Detail — Only for Other / Custom", custom_identity_notes: "Additional Identity Notes",
+    structured_piercing_custom: "Custom Piercing Detail — Only for Other / Custom", scar_mole_beauty_mark_descriptors: "Scar / Mole / Beauty Mark Descriptions — One Per Line", custom_identity_notes: "Additional Identity Notes",
 };
 
 const SHOT_LABELS = {
@@ -45,6 +45,7 @@ const SHOT_LABELS = {
     custom_extreme_focus: "Custom Extreme Close-Up Detail", closeup_region: "Regional Close-Up Area",
     custom_closeup_region: "Custom Regional Area", background: "Background / Location", custom_background: "Custom Background / Location",
     lighting: "Lighting", custom_lighting: "Custom Lighting", photo_style: "Photo Style — Social / Selfie / Documentation Look",
+    background_focus: "Background Focus / Bokeh", custom_background_focus: "Custom Background Focus",
     aspect_ratio: "Output Aspect Ratio", distortion_guard: "Perspective Protection", shot_suffix: "Additional Shot Notes",
 };
 
@@ -161,13 +162,13 @@ app.registerExtension({
     name: "full_character_creation_core.v252_compatibility_ui",
     nodeCreated(node) {
         const id = node?.comfyClass ?? node?.type;
-        if (id === "CharacterBlueprintCreatorV252" || id === "CharacterBlueprintCreatorV253") scheduleCompatibilityRestore(node, CREATOR_LABELS, 4200);
-        if (id === "CharacterShotControlV252" || id === "CharacterShotControlV253") scheduleCompatibilityRestore(node, SHOT_LABELS, 1850);
-        if (id === "CharacterPromptAssemblerV252" || id === "CharacterPromptAssemblerV253") applyFriendlyLabels(node, ASSEMBLER_LABELS);
+        if (["CharacterBlueprintCreatorV252", "CharacterBlueprintCreatorV253", "CharacterBlueprintCreatorV254", "CharacterBlueprintCreatorV255", "CharacterBlueprintCreatorV256", "CharacterBlueprintCreatorV257", "CharacterBlueprintCreatorV258", "CharacterBlueprintCreatorV259", "CharacterBlueprintCreatorV260"].includes(id)) scheduleCompatibilityRestore(node, CREATOR_LABELS, 4200);
+        if (["CharacterShotControlV252", "CharacterShotControlV253", "CharacterShotControlV254", "CharacterShotControlV255", "CharacterShotControlV256", "CharacterShotControlV257", "CharacterShotControlV258", "CharacterShotControlV259", "CharacterShotControlV260"].includes(id)) scheduleCompatibilityRestore(node, SHOT_LABELS, 1850);
+        if (["CharacterPromptAssemblerV252", "CharacterPromptAssemblerV253", "CharacterPromptAssemblerV254", "CharacterPromptAssemblerV255", "CharacterPromptAssemblerV256", "CharacterPromptAssemblerV257", "CharacterPromptAssemblerV258", "CharacterPromptAssemblerV259", "CharacterPromptAssemblerV260"].includes(id)) applyFriendlyLabels(node, ASSEMBLER_LABELS);
         if (id === "FCCSupportPanel") addSupportPanel(node);
     },
     async beforeRegisterNodeDef(nodeType, nodeData) {
-        if (nodeData.name === "CharacterBlueprintCreatorV252" || nodeData.name === "CharacterBlueprintCreatorV253") {
+        if (["CharacterBlueprintCreatorV252", "CharacterBlueprintCreatorV253", "CharacterBlueprintCreatorV254", "CharacterBlueprintCreatorV255", "CharacterBlueprintCreatorV256", "CharacterBlueprintCreatorV257", "CharacterBlueprintCreatorV258", "CharacterBlueprintCreatorV259", "CharacterBlueprintCreatorV260"].includes(nodeData.name)) {
             const original = nodeType.prototype.onNodeCreated;
             nodeType.prototype.onNodeCreated = function () {
                 const result = original?.apply(this, arguments);
@@ -175,7 +176,7 @@ app.registerExtension({
                 return result;
             };
         }
-        if (nodeData.name === "CharacterShotControlV252" || nodeData.name === "CharacterShotControlV253") {
+        if (["CharacterShotControlV252", "CharacterShotControlV253", "CharacterShotControlV254", "CharacterShotControlV255", "CharacterShotControlV256", "CharacterShotControlV257", "CharacterShotControlV258", "CharacterShotControlV259", "CharacterShotControlV260"].includes(nodeData.name)) {
             const original = nodeType.prototype.onNodeCreated;
             nodeType.prototype.onNodeCreated = function () {
                 const result = original?.apply(this, arguments);
@@ -183,7 +184,7 @@ app.registerExtension({
                 return result;
             };
         }
-        if (nodeData.name === "CharacterPromptAssemblerV252" || nodeData.name === "CharacterPromptAssemblerV253") {
+        if (["CharacterPromptAssemblerV252", "CharacterPromptAssemblerV253", "CharacterPromptAssemblerV254", "CharacterPromptAssemblerV255", "CharacterPromptAssemblerV256", "CharacterPromptAssemblerV257", "CharacterPromptAssemblerV258", "CharacterPromptAssemblerV259", "CharacterPromptAssemblerV260"].includes(nodeData.name)) {
             const original = nodeType.prototype.onNodeCreated;
             nodeType.prototype.onNodeCreated = function () {
                 const result = original?.apply(this, arguments);

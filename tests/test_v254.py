@@ -15,7 +15,7 @@ def test_v254_registry_is_current_only():
     assert set(NODE_CLASS_MAPPINGS) == {
         "QwenDatasetQueue", "FCCDatasetDirector", "FCCQueueItemRouter",
         "FCCKreaBlueprintDatasetDirector", "FCCKreaQueueItemRouter",
-        "CharacterBlueprintCreatorV254", "CharacterShotControlV254", "CharacterPromptAssemblerV254",
+        "CharacterBlueprintCreatorV260", "CharacterShotControlV260", "CharacterPromptAssemblerV260",
         "FCCQwenAnglePromptMode", "FCCSupportPanel",
     }
 
